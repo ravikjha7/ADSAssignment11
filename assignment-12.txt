@@ -1,0 +1,14 @@
+CREATE (Home {City: "Sangli", Lattitude: 16.8524, Longitude:  74.5815})-[:Home_to_restaurant]->({City: "Kolhapur", Lattitude: 16.7050, Longitude: 74.2433})<-[:College_to_restaurant]-({City: "Sangli",Lattitude: 16.8524, Longitude:  74.5815})-[:College_to_Home]->(Home)-[:Home_to_office]->({City: "Pune", Lattitude:18.5204, Longitude: 73.8567}),
+({City: "Aashta", Lattitude: 17.696634, Longitude: 74.160721})<-[:Home_to_busstation]-(Home)-[:Home_to_school]->({City: "Sangli", Lattitude: 16.8524, Longitude:  74.5815})
+
+
+MATCH path0 = (Home {City: "Sangli", Lattitude: 16.8524, Longitude:  74.5815})-[:Home_to_restaurant]->({City: "Kolhapur", Lattitude: 16.7050, Longitude: 74.2433})<-[:College_to_restaurant]-({City: "Sangli",Lattitude: 16.8524, Longitude:  74.5815})-[:College_to_Home]->(Home)-[:Home_to_office]->({City:"Pune", Lattitude:18.5204, Longitude: 73.8567}),
+path1 = ({City: "Aashta", Lattitude: 17.696634, Longitude: 74.160721})<-[:Home_to_busstation]-(Home)-[:Home_to_school]->({City: "Sangli", Lattitude: 16.8524, Longitude:  74.5815})
+RETURN path0, path1
+
+
+WITH point({longitude: 74.58151, latitude: 16.8524}) AS P1, point({latitude: 16.8524, longitude: 74.5815}) AS P2
+RETURN point.distance(P1, P2) AS DISTANCE
+
+WITH point({longitude: 74.2433, latitude: 16.7050}) AS P1, point({latitude:  17.696634, longitude: 74.160721}) AS P2
+RETURN point.distance(P1, P2) AS DISTANCE

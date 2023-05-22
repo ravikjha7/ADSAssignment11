@@ -1,0 +1,15 @@
+LOAD CSV WITH HEADERS FROM 'file:///nodes.csv' AS row Create
+(n:Paper{id:row["nodeId"], subject:row["subject"], features:row["features"]});
+
+LOAD CSV WITH HEADERS FROM 'file:///edges.csv' AS row Match
+(u:Paper{id:row["sourceNodeId"]}) Match (v:Paper{id:row["targetNodeId"]})
+Create (u)-[:Cites]->(v);
+
+MATCH (p:Paper) RETURN DISTINCT p.subject ORDER BY p.subject
+
+MATCH (n:Paper) return n
+
+MATCH (n:Paper)-[r:Cites]->(m:Paper) RETURN n.id as sourceNodeId, m.id as
+targetNodeId, n.subject, n.features
+
+:server user add
